@@ -1,9 +1,10 @@
 import React from 'react';
+import Form from '../components/Form.js';
 
 const Loginpage = () => {
     return (
         <div>
-            <h1>Coucou</h1>
+            <Form />
         </div>
     );
 }

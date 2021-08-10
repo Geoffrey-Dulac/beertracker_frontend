@@ -4,7 +4,7 @@ import Loginpage from './pages/Loginpage';
 
 const App = () => {
   return (
-    <div>
+    <div className='app'>
       <Loginpage/>
     </div>
   );
