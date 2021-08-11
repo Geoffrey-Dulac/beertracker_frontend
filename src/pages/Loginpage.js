@@ -3,6 +3,10 @@ import Form from '../components/Form.js';
 import { Link } from "react-router-dom";
 
 const Loginpage = () => {
+    handleLogin = (user) => {
+        console.log(user)
+    }
+
     return (
         <div className='loginpage'>
             <div className='formcard'>
@@ -10,7 +14,7 @@ const Loginpage = () => {
                     <h1>Beertracker</h1>
                     <h3>connexion</h3>                
                 </div>
-                <Form classes='mb-3 bgprimary50' url='' buttonText='Se connecter' inputs={['username', 'password']} />
+                <Form handleLogin={(user) => handleLogin(user)} handleclasses='mb-3 bgprimary50' url='' buttonText='Se connecter' inputs={['username', 'password']} />
                 <Link to="/signup"><p className='text-dark'>Créer un compte</p></Link>
             </div>
         </div>

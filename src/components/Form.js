@@ -14,6 +14,28 @@ class Form extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     };
 
+    handleSubmit = (e, url, inputs) => {
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                ...inputs
+            }) 
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            this.props.handleLogin(data.user)
+        })
+        this.props.inputs.map((item) => {
+            this.setState({
+                [item]: ''
+            });
+        })
+    }
+
     render() {
         let emptyInputsCounter = 0;
         this.props.inputs.map((item) => {
@@ -29,7 +51,7 @@ class Form extends React.Component {
                         ? <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} type={item}/>
                         : <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} />
                 )}
-                <button className={emptyInputsCounter === 0 ? 'mainbutton' : 'mainbutton-disabled'}>
+                <button className={emptyInputsCounter === 0 ? 'mainbutton' : 'mainbutton-disabled'} onClick={() => handleSubmit(e, this.props.url, this.props.inputs)}>
                     {this.props.buttonText}
                 </button>
             </div>
