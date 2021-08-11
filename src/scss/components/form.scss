@@ -1,0 +1,9 @@
+.formstructure {
+    display: flex;
+    flex-direction: column;
+    input {
+        border-radius: 4px;
+        height: 50px;
+        padding: 4px;
+    }
+}

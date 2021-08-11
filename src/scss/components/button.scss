@@ -1,0 +1,14 @@
+@import '../colors.scss';
+
+.mainbutton {
+    width: auto;
+    border-radius: 32px;
+    background-color: $csecondary100;
+    padding: 10px 0px;
+    transition: .3s ease-out; 
+    &:hover {
+        background-color: $cprimary600;
+        color: white;
+        transition: .3s ease-out; 
+    }
+}

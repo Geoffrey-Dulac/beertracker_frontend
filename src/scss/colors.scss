@@ -1,3 +1,4 @@
+$cprimary50: #edf9fd;
 $cprimary100: #4cc9f0;
 $cprimary200: #4895ef;
 $cprimary300: #4361ee;
@@ -7,3 +8,7 @@ $cprimary600: #480ca8;
 
 $csecondary100: #f72585;
 $csecondary200: #b5179e;
+
+.bgprimary50 {
+    background-color: $cprimary50;
+}

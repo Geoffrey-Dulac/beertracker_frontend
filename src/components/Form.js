@@ -1,9 +1,14 @@
 import React from 'react';
 
-const Form = () => {
+const Form = (props) => {
     return (
-        <div>
-            <p>Form</p>
+        <div className='formstructure w-100 px-5 py-3'>
+            {props.inputs.map((item) =>
+                item == 'password'
+                    ? <input placeholder={item} name={item} className={props.classes} type={item}/>
+                    : <input placeholder={item} name={item} className={props.classes}/>
+            )}
+            <button className='mainbutton'>{props.buttonText}</button>
         </div>
     );
 }

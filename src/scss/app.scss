@@ -1,9 +1,14 @@
 @import './colors.scss';
+@import './pages/loginpage.scss';
+@import './components/form.scss';
+@import './components/button.scss';
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
 
 .app {
     min-height: 100vh;
 }
 
-body, h1, p {
+body, h1, h3, p, button, input {
     margin: 0px;
+    font-family: 'Play', sans-serif;
 }
