@@ -48,7 +48,7 @@ class Form extends React.Component {
         return (
             <div className='formstructure w-100 px-5 py-3'>
                 {this.props.inputs.map((item) =>
-                    item === 'password_digest'
+                    item === 'password'
                         ? <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} type='password' />
                         : <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} />
                 )}
