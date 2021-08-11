@@ -15,7 +15,7 @@ class Signuppage extends React.Component {
                         <h1>Beertracker</h1>
                         <h3>inscription</h3>                
                     </div>
-                    <Form handleLogin={(user) => this.handleSignuppage(user)} classes='mb-3 bgprimary50' url='' buttonText="S'inscrire" inputs={['username', 'email', 'password']} />
+                    <Form handleLogin={(user) => this.handleSignuppage(user)} classes='mb-3 bgprimary50' url='http://localhost:8000/users' buttonText="S'inscrire" inputs={['username', 'email', 'password_digest']} />
                     <Link to="/login"><p className='text-dark'>Se connecter</p></Link>
                 </div>
             </div>
