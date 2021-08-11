@@ -6,9 +6,21 @@
     background-color: $csecondary100;
     padding: 10px 0px;
     transition: .3s ease-out; 
+    font-family: 'Play', sans-serif;
     &:hover {
         background-color: $cprimary600;
         color: white;
         transition: .3s ease-out; 
     }
+}
+
+.mainbutton-disabled {
+    width: auto;
+    border-radius: 32px;
+    background-color: $csecondary200;
+    padding: 10px 0px;
+    font-family: 'Play', sans-serif;
+    cursor: default;
+    pointer-events: none;
+    color: grey;
 }
