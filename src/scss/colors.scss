@@ -9,6 +9,12 @@ $cprimary600: #480ca8;
 $csecondary100: #f72585;
 $csecondary200: #b5179e;
 
+$cerror: red;
+
 .bgprimary50 {
     background-color: $cprimary50;
+}
+
+.cerror {
+    color: $cerror;
 }
