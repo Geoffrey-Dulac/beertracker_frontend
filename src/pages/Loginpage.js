@@ -3,10 +3,6 @@ import Form from '../components/Form.js';
 import { Link } from "react-router-dom";
 
 class Loginpage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleLoginpage = (user) => {
         console.log(user);
     }
