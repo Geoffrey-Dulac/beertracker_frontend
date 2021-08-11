@@ -12,9 +12,10 @@ class Form extends React.Component {
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
-    };
+    }
 
     handleSubmit = (e, url, inputs) => {
+
         fetch(url, {
             method: 'POST',
             headers: {
@@ -22,7 +23,7 @@ class Form extends React.Component {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                ...inputs
+                inputs
             }) 
         })
         .then(resp => resp.json())
@@ -51,7 +52,7 @@ class Form extends React.Component {
                         ? <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} type={item}/>
                         : <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} />
                 )}
-                <button className={emptyInputsCounter === 0 ? 'mainbutton' : 'mainbutton-disabled'} onClick={() => handleSubmit(e, this.props.url, this.props.inputs)}>
+                <button className={emptyInputsCounter === 0 ? 'mainbutton' : 'mainbutton-disabled'} onClick={(e) => this.handleSubmit(e, this.props.url, this.state)}>
                     {this.props.buttonText}
                 </button>
             </div>
