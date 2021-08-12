@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from '../components/Form.js';
+import Form from '../components/Form';
 import { Link } from "react-router-dom";
 
 class Signuppage extends React.Component {
