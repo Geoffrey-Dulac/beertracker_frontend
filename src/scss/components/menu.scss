@@ -1,0 +1,15 @@
+@import '../colors.scss';
+
+.hamburger {
+    width: 40px;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    hr {
+        margin: 0px 0px 10px 0px;
+        height: 5px !important;
+        background-color: $cprimary700;
+        opacity: 1;
+    }
+}

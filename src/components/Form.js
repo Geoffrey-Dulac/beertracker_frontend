@@ -18,6 +18,12 @@ class Form extends React.Component {
     handleSubmit = (e, url, inputs) => {
         e.target.classList.remove('mainbutton');
         e.target.classList.add('mainbutton-disabled');
+        this.setState({ errorMessage: '' })
+        this.props.inputs.map((item) => {
+            this.setState({
+                [item]: ''
+            });
+        })
         fetch(url, {
             method: 'POST',
             headers: {
@@ -30,18 +36,12 @@ class Form extends React.Component {
         })
         .then((response) => response.json())
         .then(data => { 
-            this.props.inputs.map((item) => {
-                this.setState({
-                    [item]: ''
-                });
-            })
             e.target.classList.add('mainbutton');
             e.target.classList.remove('mainbutton-disabled');
             if (data.status === 'failed') {
                 this.setState({ errorMessage: data.message })
             } else {
                 this.props.handleSubmission(data.token)
-                this.setState({ errorMessage: '' })
             }
         })
     }
@@ -67,9 +67,15 @@ class Form extends React.Component {
                     }
                 </div>
                 {this.props.inputs.map((item) =>
-                    item === 'password'
-                        ? <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} type='password' />
-                        : <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} />
+                    { 
+                        if (item === 'password') {
+                            return <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} type='password' />
+                        } else if (item === 'username') {
+                            return <input maxLength="15" value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} />
+                        } else {
+                            return <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} />
+                        }
+                    }
                 )}
                 <button className={errorsFormCounter === 0 ? 'mainbutton mt-2' : 'mainbutton-disabled mt-2'} onClick={(e) => this.handleSubmit(e, this.props.url, this.state)}>
                     {this.props.buttonText}

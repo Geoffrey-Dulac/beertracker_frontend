@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Menu from '../components/Menu';
 
-function Homepage() {
+function Homepage(props) {
     const [username, setUsername] = useState('');
 
     useEffect(() => {
@@ -13,8 +14,8 @@ function Homepage() {
             })
             .then((resp) => resp.json())
             .then((data) => {
-                if (data.message) {
-                    this.props.history.push('/login');
+                if (data.message === 'Please log in') {
+                    props.history.push('/login');
                 } else {
                     setUsername(data.username);
                 }
@@ -26,9 +27,7 @@ function Homepage() {
 
     return (
         <div>
-            { username !== '' &&
-                <p>hello {username}</p>
-            }
+            <Menu />
         </div>
     );
 }
