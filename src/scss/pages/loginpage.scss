@@ -10,13 +10,23 @@
 
 .formcard {
     padding: 10px 0px;
-    background-color: $cprimary300;
-    width: 350px;
+    background-color: white;
+    width: 450px;
     margin: auto;
     border-radius: 8px;
-    box-shadow: 2px 2px 6px $cprimary600;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    .mainbutton, .mainbutton-disabled {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .formcard {
+        width: 100%;
+    }
 }

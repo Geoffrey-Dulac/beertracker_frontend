@@ -1,26 +1,29 @@
 @import '../colors.scss';
 
 .mainbutton {
-    width: auto;
-    border-radius: 32px;
-    background-color: $csecondary100;
-    padding: 10px 0px;
+    border: 0px;
+    min-width: 100px;
+    border-radius: 8px;
+    background-color: $cprimary500;
+    color: white;
+    padding: 7px 6px;
     transition: .3s ease-out; 
     font-family: 'Play', sans-serif;
     &:hover {
-        background-color: $cprimary600;
-        color: white;
+        background-color: rgba(58, 12, 163, 0.8);
         transition: .3s ease-out; 
     }
 }
 
 .mainbutton-disabled {
-    width: auto;
-    border-radius: 32px;
-    background-color: $csecondary200;
-    padding: 10px 0px;
-    font-family: 'Play', sans-serif;
     cursor: default;
     pointer-events: none;
-    color: grey;
+    border: 0px;
+    min-width: 100px;
+    border-radius: 8px;
+    background-color: rgba(58, 12, 163, 0.5);
+    color: white;
+    padding: 7px 6px;
+    transition: .3s ease-out; 
+    font-family: 'Play', sans-serif;
 }

@@ -15,7 +15,9 @@ class Form extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    handleSubmit = (url, inputs) => {
+    handleSubmit = (e, url, inputs) => {
+        e.target.classList.remove('mainbutton');
+        e.target.classList.add('mainbutton-disabled');
         fetch(url, {
             method: 'POST',
             headers: {
@@ -28,30 +30,37 @@ class Form extends React.Component {
         })
         .then((response) => response.json())
         .then(data => { 
+            this.props.inputs.map((item) => {
+                this.setState({
+                    [item]: ''
+                });
+            })
+            e.target.classList.add('mainbutton');
+            e.target.classList.remove('mainbutton-disabled');
             if (data.status === 'failed') {
                 this.setState({ errorMessage: data.message })
             } else {
-                this.props.handleLogin()
+                this.props.handleSubmission(data.token)
                 this.setState({ errorMessage: '' })
             }
-        })
-        this.props.inputs.map((item) => {
-            this.setState({
-                [item]: ''
-            });
         })
     }
 
     render() {
-        let emptyInputsCounter = 0;
+        let errorsFormCounter = 0;
         this.props.inputs.map((item) => {
             if (this.state[item] === '') {
-                emptyInputsCounter += 1;
+                errorsFormCounter += 1;
+            }
+            if (item === 'email') {
+                if (!/^\S+@\S+\.\S+$/.test(this.state[item])) {
+                    errorsFormCounter += 1;
+                }
             }
         })
         
         return (
-            <div className='formstructure w-100 px-5'>
+            <div className='formstructure'>
                 <div className='height-18px text-center mb-2'>
                     { this.state.errorMessage !== '' &&
                         <p className='cerror'>{this.state.errorMessage}</p>
@@ -62,7 +71,7 @@ class Form extends React.Component {
                         ? <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} type='password' />
                         : <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} />
                 )}
-                <button className={emptyInputsCounter === 0 ? 'mainbutton' : 'mainbutton-disabled'} onClick={() => this.handleSubmit(this.props.url, this.state)}>
+                <button className={errorsFormCounter === 0 ? 'mainbutton mt-2' : 'mainbutton-disabled mt-2'} onClick={(e) => this.handleSubmit(e, this.props.url, this.state)}>
                     {this.props.buttonText}
                 </button>
             </div>

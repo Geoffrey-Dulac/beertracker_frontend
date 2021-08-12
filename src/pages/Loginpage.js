@@ -3,8 +3,9 @@ import Form from '../components/Form';
 import { Link } from "react-router-dom";
 
 class Loginpage extends React.Component {
-    handleLoginpage = () => {
-        console.log('connected');
+    handleLogin = (token) => {
+        localStorage.setItem('token', token);
+        this.props.history.push('/home');
     }
 
     render() {
@@ -15,8 +16,8 @@ class Loginpage extends React.Component {
                         <h1>Beertracker</h1>
                         <h3>connexion</h3>                
                     </div>
-                    <Form classes='mb-3 bgprimary50' handleLogin={() => this.handleLoginpage()} url='http://localhost:8000/login' buttonText='Se connecter' inputs={['email', 'password']} />
-                    <Link to="/signup"><p className='text-dark'>Créer un compte</p></Link>
+                    <Form classes='mb-1' handleSubmission={(token) => this.handleLogin(token)} url='http://localhost:8000/login' buttonText='Se connecter' inputs={['email', 'password']} />
+                    <Link to="/signup"><p className='text-dark mt-2'>Créer un compte</p></Link>
                 </div>
             </div>
         );
