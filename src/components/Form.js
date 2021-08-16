@@ -36,10 +36,8 @@ class Form extends React.Component {
         })
         .then((response) => response.json())
         .then(data => { 
-            e.target.classList.add('mainbutton');
-            e.target.classList.remove('mainbutton-disabled');
             if (data.status === 'failed') {
-                this.setState({ errorMessage: data.message })
+                this.setState({ errorMessage: data.message });
             } else {
                 this.props.handleSubmission(data.token)
             }

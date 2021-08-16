@@ -8,7 +8,7 @@ import { Switch, Route, withRouter } from "react-router-dom";
 
 const App = () => {
 	return (
-		<div className='app'>
+		<div className='app p-2 p-sm-5'>
 			<Switch>
 				<Route exact path="/" component={withRouter(Loginpage)} />
 				<Route exact path="/login" component={withRouter(Loginpage)} />
