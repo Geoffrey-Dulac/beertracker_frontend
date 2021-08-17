@@ -67,11 +67,11 @@ class Form extends React.Component {
                 {this.props.inputs.map((item) =>
                     { 
                         if (item === 'password') {
-                            return <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} type='password' />
+                            return <input value={this.state[item]} onChange={(e) => this.handleChange(e)} placeholder={item} name={item} className={this.props.classes} key={item} type='password' />
                         } else if (item === 'username') {
-                            return <input maxLength="15" value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} />
+                            return <input maxLength="15" value={this.state[item]} onChange={(e) => this.handleChange(e)} placeholder={item} name={item} className={this.props.classes} key={item} />
                         } else {
-                            return <input value={this.state[item]} onChange={this.handleChange} placeholder={item} name={item} className={this.props.classes} key={item} />
+                            return <input value={this.state[item]} onChange={(e) => this.handleChange(e)} placeholder={item} name={item} className={this.props.classes} key={item} />
                         }
                     }
                 )}

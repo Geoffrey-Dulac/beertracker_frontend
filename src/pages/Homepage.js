@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Menu from '../components/Menu';
 import Beercard from '../components/Beercard';
+import Popinaddbeer from '../components/Popinaddbeer';
+import loader from '../images/loader.gif'
+
 
 function Homepage(props) {
     const [username, setUsername] = useState('');
     const [user_beers, setUserbeers] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isPopinAddBeer, setIsPopinAddBeer] = useState(false);
+
+    const handleAddBeerClick = () => {
+        setIsPopinAddBeer(true);
+    }
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -18,7 +26,6 @@ function Homepage(props) {
             .then((res) => res.json())
             .then(
                 (data) => {
-                    console.log(data);
                     if (data.message === 'Please log in') {
                         props.history.push('/login');
                     } else {
@@ -37,26 +44,30 @@ function Homepage(props) {
     }, [])
 
     if (isLoaded) {
+
         return (
-            <div>
+            <div className="container-pages">
                 <Menu />
                 <h1>Hello {username}</h1>
+                <h3 className='mt-5'>Mon classement bières</h3>
                 <div>
-                    {user_beers.map((userbeer, i) => {
-                        return <Beercard key={userbeer[i].name} name={userbeer[i].name} degrees={userbeer[i].degrees} 
-                        kind={userbeer[i].kind} usergrade={userbeer['user_grade']} />
+                    { user_beers.map((userbeer, i) => {
+                        if (i < 5) {
+                            return <Beercard key={userbeer[i].name} name={userbeer[i].name} degrees={userbeer[i].degrees} 
+                            kind={userbeer[i].kind} usergrade={userbeer['user_grade']} brewer={userbeer['brewer']} />
+                        }
                     })}
                 </div>
+                <button className='mainbutton position-cta-fixed' onClick={handleAddBeerClick}>J'ajoute une bière</button>
+                { isPopinAddBeer &&
+                    <Popinaddbeer />
+                }
             </div>
         )
     } else {
         return (
             <div>
-                <Menu />
-                <h1>Hello {username}</h1>
-                <div>
-                    chargement...
-                </div>
+                <img src={loader} alt="loader" className='loader' />
             </div>
         )
     }

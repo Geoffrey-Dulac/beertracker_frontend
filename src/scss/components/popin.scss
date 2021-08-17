@@ -1,0 +1,28 @@
+@import '../colors.scss';
+
+.popin-background {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left : 0;
+    background-color: rgba($cprimary600, 0.8);
+    z-index: 5;
+}
+
+.popin {
+    padding: 10px;
+    width: 90%;
+    height: 80%;
+    background-color: $cgrey100;
+    border-radius: 4px;
+    position: fixed;
+    top: 10%;
+    z-index: 8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

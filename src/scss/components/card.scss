@@ -1,0 +1,33 @@
+@import '../colors.scss';
+
+.beercard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    border-bottom: 1px solid $cgrey100;
+    .logo_beer_card {
+        height: 40px;
+        margin: 0px 10px;
+    }
+    .outof10 {
+        color: #f7db32;
+        font-weight: bold;
+        font-size: 24px;
+        font-family: 'Lobster', cursive;
+    }
+    .width-parts-card {
+        width: 20%;
+        text-align: center;
+    }
+    .width-parts-card-large {
+        width: 40%;
+    }
+}
+
+@media (max-width: 768px) {
+    .width-parts-card, .width-parts-card-large {
+        width: auto !important;
+    }
+}

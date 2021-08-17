@@ -2,10 +2,14 @@
 @import './utilities.scss';
 @import './pages/loginpage.scss';
 @import './components/form.scss';
+@import './components/card.scss';
 @import './components/input.scss';
+@import './components/popin.scss';
+@import './components/container.scss';
 @import './components/button.scss';
+@import './components/loader.scss';
 @import './components/menu.scss';
-@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Play:wght@400;700&display=swap");
 
 .app {
     min-height: 100vh;
@@ -15,4 +19,12 @@
 body, h1, h3, p, input {
     margin: 0px;
     font-family: 'Play', sans-serif;
+}
+
+h3 {
+    color: $cprimary500;
+}
+
+.bold {
+    font-weight: bold;
 }
