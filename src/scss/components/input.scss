@@ -5,3 +5,19 @@ input {
     padding: 4px;
     width: 100%;
 }
+
+.autocomplete-element {
+    background-color: white;
+    margin-bottom: 0px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    &:hover {
+        background-color: $cgrey200;
+    }
+}
+
+.autocomplete-group {
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px black;
+}

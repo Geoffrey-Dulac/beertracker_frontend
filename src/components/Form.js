@@ -3,11 +3,11 @@ import React from 'react';
 class Form extends React.Component {
     constructor(props) {
         super(props);
-        let objectInputs = {};
-        this.props.inputs.map((item) => {
-            objectInputs[item] = '';
-        })
-        this.state = objectInputs;
+        let object = {};
+        props.inputs.map((elem) => {
+            object[elem] = '';
+        });
+        this.state = object;
         this.state['errorMessage'] = '';
     }
 
@@ -20,7 +20,7 @@ class Form extends React.Component {
         e.target.classList.add('mainbutton-disabled');
         this.setState({ errorMessage: '' })
         this.props.inputs.map((item) => {
-            this.setState({
+            return this.setState({
                 [item]: ''
             });
         })
@@ -48,11 +48,11 @@ class Form extends React.Component {
         let errorsFormCounter = 0;
         this.props.inputs.map((item) => {
             if (this.state[item] === '') {
-                errorsFormCounter += 1;
+                return errorsFormCounter += 1;
             }
             if (item === 'email') {
                 if (!/^\S+@\S+\.\S+$/.test(this.state[item])) {
-                    errorsFormCounter += 1;
+                    return errorsFormCounter += 1;
                 }
             }
         })

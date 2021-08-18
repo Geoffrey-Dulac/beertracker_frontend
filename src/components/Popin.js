@@ -1,5 +1,4 @@
-import { render } from '@testing-library/react';
-import React, { useState } from 'react';
+import React from 'react';
 import Popinstep from './Popinstep';
 
 class Popin extends React.Component {
@@ -12,6 +11,7 @@ class Popin extends React.Component {
         })
         this.state = objectInputs;
         this.state['step'] = 1;
+        this.state['beers'] = props.autocomplete_beers;
     }
 
     handleNextStep = () => {
@@ -26,24 +26,44 @@ class Popin extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    handleSelectAutocomplete = (e) => {
+        this.setState({ name: e.target.innerText });
+    }
+
+    handlePlusButton = () => {
+        this.setState({ user_grade: parseInt(this.state.user_grade) + 1 });
+    }
+
+    handleLessButton = () => {
+        this.setState({ user_grade: parseInt(this.state.user_grade) - 1 });
+    }
+
     render() {
         const stepsNumber = Object.keys(this.props.elements).length;
         const stepsName = Object.keys(this.props.elements)[this.state.step - 1];
+
         return (
             <div className='popin'>
                 { Object.keys(this.props.elements).map((key, i) => {
                     if (i + 1 === this.state.step) {
-                        return <Popinstep val={this.state[key]} handleChangeInput={(e) => this.handleChange(e)} key={i} step={this.state.step} name={key} question={this.props.elements[key]} />
+                        if (this.state.step === this.props.autocomplete_step) {
+                            return <Popinstep handleSelectAutocomplete={(e) => this.handleSelectAutocomplete(e)} autocomplete_beers={this.props.autocomplete_beers} val={this.state[key]} handleChangeInput={(e) => this.handleChange(e)} key={i} step={this.state.step} name={key} question={this.props.elements[key]} />
+                        } else {
+                            return <Popinstep handleLessButton={this.handleLessButton} handlePlusButton={this.handlePlusButton} val={this.state[key]} handleChangeInput={(e) => this.handleChange(e)} key={i} step={this.state.step} name={key} question={this.props.elements[key]} />
+                        }
                     }
                 })}
-                { this.state.step !== stepsNumber &&
+                { this.state.step === this.props.autocomplete_step &&
+                    <button className={this.state[stepsName] === '' || this.state.beers.indexOf(this.state[stepsName]) === -1  ? 'mainbutton-disabled mt-2' : 'mainbutton mt-2'} onClick={this.handleNextStep}>Suivant</button>
+                }
+                { this.state.step !== stepsNumber && this.state.step !== this.props.autocomplete_step &&
                     <button className={this.state[stepsName] === '' ? 'mainbutton-disabled mt-2' : 'mainbutton mt-2'} onClick={this.handleNextStep}>Suivant</button>
                 }
-                { this.state.step === stepsNumber &&
+                { this.state.step === stepsNumber && this.state.step !== this.props.autocomplete_step &&
                     <button className={this.state[stepsName] === '' ? 'mainbutton-disabled mt-2' : 'mainbutton mt-2'}>Valider</button>
                 }
                 { this.state.step !== 1 &&
-                    <p onClick={this.handlePrevisousStep}>retour</p>
+                    <p className='cpointer' onClick={this.handlePrevisousStep}>retour</p>
                 }
             </div>
         );

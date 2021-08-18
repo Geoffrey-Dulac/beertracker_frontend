@@ -17,6 +17,7 @@ function Homepage(props) {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        let mounted = true;
         if (token) {
             fetch ('http://localhost:8000/user_beers', {
                 headers : {
@@ -28,7 +29,7 @@ function Homepage(props) {
                 (data) => {
                     if (data.message === 'Please log in') {
                         props.history.push('/login');
-                    } else {
+                    } else if (mounted) {
                         setUsername(data.username);
                         setUserbeers(data.user_beers);
                         setIsLoaded(true);
@@ -40,6 +41,10 @@ function Homepage(props) {
             )
         } else {
             props.history.push('/login');
+        }
+
+        return function cleanup() {
+            mounted = false
         }
     }, [])
 
