@@ -4,7 +4,7 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         let object = {};
-        props.inputs.map((elem) => {
+        props.inputs.forEach((elem) => {
             object[elem] = '';
         });
         this.state = object;
@@ -46,13 +46,13 @@ class Form extends React.Component {
 
     render() {
         let errorsFormCounter = 0;
-        this.props.inputs.map((item) => {
+        this.props.inputs.forEach((item) => {
             if (this.state[item] === '') {
-                return errorsFormCounter += 1;
+                errorsFormCounter += 1;
             }
             if (item === 'email') {
                 if (!/^\S+@\S+\.\S+$/.test(this.state[item])) {
-                    return errorsFormCounter += 1;
+                    errorsFormCounter += 1;
                 }
             }
         })

@@ -15,9 +15,13 @@ function Homepage(props) {
         setIsPopinAddBeer(true);
     }
 
-    useEffect(() => {
+    const handleClosePopin = () => {
+        setIsPopinAddBeer(false);
+        fetchUserBeers();
+    }
+
+    const fetchUserBeers = () => {
         const token = localStorage.getItem('token');
-        let mounted = true;
         if (token) {
             fetch ('http://localhost:8000/user_beers', {
                 headers : {
@@ -29,7 +33,7 @@ function Homepage(props) {
                 (data) => {
                     if (data.message === 'Please log in') {
                         props.history.push('/login');
-                    } else if (mounted) {
+                    } else {
                         setUsername(data.username);
                         setUserbeers(data.user_beers);
                         setIsLoaded(true);
@@ -42,10 +46,10 @@ function Homepage(props) {
         } else {
             props.history.push('/login');
         }
+    }
 
-        return function cleanup() {
-            mounted = false
-        }
+    useEffect(() => {
+        fetchUserBeers();
     }, [])
 
     if (isLoaded) {
@@ -57,15 +61,13 @@ function Homepage(props) {
                 <h3 className='mt-5'>Mon classement bières</h3>
                 <div>
                     { user_beers.map((userbeer, i) => {
-                        if (i < 5) {
-                            return <Beercard key={userbeer[i].name} name={userbeer[i].name} degrees={userbeer[i].degrees} 
-                            kind={userbeer[i].kind} usergrade={userbeer['user_grade']} brewer={userbeer['brewer']} />
-                        }
+                        return <Beercard key={userbeer[i].name} name={userbeer[i].name} degrees={userbeer[i].degrees} 
+                        kind={userbeer[i].kind} usergrade={userbeer['user_grade']} brewer={userbeer['brewer']} />
                     })}
                 </div>
                 <button className='mainbutton position-cta-fixed' onClick={handleAddBeerClick}>J'ajoute une bière</button>
                 { isPopinAddBeer &&
-                    <Popinaddbeer />
+                    <Popinaddbeer handleClosePopin={handleClosePopin}/>
                 }
             </div>
         )

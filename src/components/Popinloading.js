@@ -1,7 +1,7 @@
 import React from 'react';
 import loader from '../images/loader.gif'
 
-function Popinloading(props) {
+function Popinloading() {
     return (
         <div className='popin'>
             <img src={loader} alt="loader" className='loader' />

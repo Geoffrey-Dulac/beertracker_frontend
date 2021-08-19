@@ -25,4 +25,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    .close-cross {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        height: 15px;
+        cursor: pointer;
+    }
+    .usergrade-popin {
+        text-align: center;
+        background-color: transparent;
+        border: none;
+        font-size: 30px;
+        margin: 20px 0px;
+        color: $csecondary100;
+    }
 }

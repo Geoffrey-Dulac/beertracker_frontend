@@ -10,7 +10,6 @@ function Popinaddbeer(props) {
     const datas = {name: 'Choisissez votre bière', user_grade: 'Quelle note lui attribueriez-vous ?'}
 
     useEffect(() => {
-        let mounted = true
         const token = localStorage.getItem('token');
         if (token) {
             fetch ('http://localhost:8000/beers_names', {
@@ -23,7 +22,7 @@ function Popinaddbeer(props) {
                 (data) => {
                     if (data.message === 'Please log in') {
                         props.history.push('/login');
-                    } else if (mounted) {
+                    } else {
                         setBeers(data.beers);
                         setIsLoaded(true);
                     }
@@ -35,17 +34,15 @@ function Popinaddbeer(props) {
         } else {
             props.history.push('/login');
         }
+    }, [props.history])
 
-        return function cleanup() {
-            mounted = false
-        }
-    }, [])
+
 
     if (isLoaded) {
         return (
             <div>
                 <Popinbackground />
-                <Popin autocomplete_beers={beers} autocomplete_step={1} elements={datas} />
+                <Popin url_request='http://localhost:8000/create_user_beer' handleClosePopin={props.handleClosePopin} autocomplete_beers={beers} autocomplete_step={1} elements={datas} />
             </div>
         );
     } else {

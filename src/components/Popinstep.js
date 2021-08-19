@@ -24,8 +24,11 @@ function Popinstep(props) {
         setAllMatchingBeers([]);
     }
 
-    document.addEventListener('click', () => {
-        setAllMatchingBeers([]);
+    document.addEventListener('click', (e) => {
+        e.stopImmediatePropagation();
+        if (allMatchingBeers.length) {
+            setAllMatchingBeers([]);
+        }
     })
 
     if (props.autocomplete_beers) {
@@ -49,7 +52,7 @@ function Popinstep(props) {
                 { props.name === 'user_grade' &&
                     <div className='d-flex align-items-center justify-content-center'>
                         <span className="fs-30px mr-10px cpointer" onClick={props.handleLessButton}>-</span>
-                        <input className='w-25' type='number' autoComplete="off" onChange={(e) => props.handleChangeInput(e)} value={props.val} name={props.name} />
+                        <input readOnly className='w-25 usergrade-popin' type='number' autoComplete="off" onChange={(e) => props.handleChangeInput(e)} value={props.val} name={props.name} />
                         <span className="fs-30px ml-10px cpointer" onClick={props.handlePlusButton}>+</span>
                     </div>
                 }
