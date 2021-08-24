@@ -9,6 +9,7 @@ function Homepage(props) {
     const [username, setUsername] = useState('');
     const [user_beers, setUserbeers] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [userBeerCounter, setUserBeerCounter] = useState(5);
     const [isPopinAddBeer, setIsPopinAddBeer] = useState(false);
 
     const handleAddBeerClick = () => {
@@ -18,6 +19,10 @@ function Homepage(props) {
     const handleClosePopin = () => {
         setIsPopinAddBeer(false);
         fetchUserBeers();
+    }
+
+    const handleClickSeeMore = () => {
+        setUserBeerCounter(userBeerCounter + 3);
     }
 
     const fetchUserBeers = () => {
@@ -61,11 +66,16 @@ function Homepage(props) {
                 <h3 className='mt-5'>Mon classement bières</h3>
                 <div>
                     { user_beers.map((userbeer, i) => {
-                        return <Beercard key={userbeer[i].name} name={userbeer[i].name} degrees={userbeer[i].degrees} 
-                        kind={userbeer[i].kind} usergrade={userbeer['user_grade']} brewer={userbeer['brewer']} />
+                        if (i < userBeerCounter) {
+                            return <Beercard key={userbeer[i].name} name={userbeer[i].name} degrees={userbeer[i].degrees} 
+                            kind={userbeer[i].kind} usergrade={userbeer['user_grade']} brewer={userbeer['brewer']} />
+                        }
                     })}
                 </div>
-                <button className='mainbutton position-cta-fixed' onClick={handleAddBeerClick}>J'ajoute une bière</button>
+                { userBeerCounter < user_beers.length && 
+                    <p onClick={handleClickSeeMore}>Voir plus</p>
+                }
+                <button className='mainbutton position-cta-fixed py-3 px-5' onClick={handleAddBeerClick}>J'ajoute une bière</button>
                 { isPopinAddBeer &&
                     <Popinaddbeer handleClosePopin={handleClosePopin}/>
                 }
