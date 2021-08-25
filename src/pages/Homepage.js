@@ -11,6 +11,7 @@ function Homepage(props) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [userBeerCounter, setUserBeerCounter] = useState(5);
     const [isPopinAddBeer, setIsPopinAddBeer] = useState(false);
+    const userBeersLenghtInitial = 5;
 
     const handleAddBeerClick = () => {
         setIsPopinAddBeer(true);
@@ -23,6 +24,14 @@ function Homepage(props) {
 
     const handleClickSeeMore = () => {
         setUserBeerCounter(userBeerCounter + 3);
+    }
+
+    const handleClickSeeLess = () => {
+        if (userBeerCounter - 3 < userBeersLenghtInitial) {
+            setUserBeerCounter(userBeersLenghtInitial);
+        } else {
+            setUserBeerCounter(userBeerCounter - 3);
+        }
     }
 
     const fetchUserBeers = () => {
@@ -63,7 +72,12 @@ function Homepage(props) {
             <div className="container-pages">
                 <Menu />
                 <h1>Hello {username}</h1>
-                <h3 className='mt-5'>Mon classement bières</h3>
+                <div className='d-flex justify-content-between mt-5'>
+                    <h3>Mon classement bières</h3>
+                    { userBeerCounter > userBeersLenghtInitial && 
+                        <p className='cpointer' onClick={handleClickSeeLess}>Voir moins</p>
+                    }
+                </div>
                 <div>
                     { user_beers.map((userbeer, i) => {
                         if (i < userBeerCounter) {
@@ -73,7 +87,9 @@ function Homepage(props) {
                     })}
                 </div>
                 { userBeerCounter < user_beers.length && 
-                    <p onClick={handleClickSeeMore}>Voir plus</p>
+                    <div className='text-center seemore'>
+                        <p><span onClick={handleClickSeeMore} className='cpointer'>Voir plus</span></p>
+                    </div>
                 }
                 <button className='mainbutton position-cta-fixed py-3 px-5' onClick={handleAddBeerClick}>J'ajoute une bière</button>
                 { isPopinAddBeer &&

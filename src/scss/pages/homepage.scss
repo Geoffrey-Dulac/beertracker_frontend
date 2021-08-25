@@ -1,0 +1,11 @@
+.seemore {
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+@media (max-width: 576px) {
+    .seemore {
+        margin-bottom: 70px;
+        margin-top: 25px;
+    }
+}
