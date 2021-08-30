@@ -46,4 +46,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    a {
+        text-decoration: none;
+    }
+    p {
+        color: $cprimary100 !important;
+        &:hover {
+            color: $cprimary200 !important;
+        }
+    }
 }

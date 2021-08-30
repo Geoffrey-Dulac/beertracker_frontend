@@ -1,6 +1,11 @@
 .seemore {
     margin-bottom: 25px;
     margin-top: 25px;
+    color: $cprimary400;
+}
+
+.seeless {
+    color: $cprimary400;
 }
 
 @media (max-width: 576px) {

@@ -1,11 +1,9 @@
 import React from 'react';
-import loader from '../images/loader.gif'
+import Loader from '../components/Loader'
 
 function Popinloading() {
     return (
-        <div className='popin'>
-            <img src={loader} alt="loader" className='loader' />
-        </div>
+        <Loader classes='popin'/>
     );
 }
 
