@@ -73,11 +73,11 @@ class Popin extends React.Component {
             (data) => {
                 if (data.status === 'success') {
                     this.props.handleClosePopin(e);
-                } else if (data.status === 'failed') {
-                    console.error(data.message);
+                    this.props.handleAlertSuccess();
                 } else {
-                    this.props.history.push('/login');
-                }
+                    this.props.handleClosePopin(e);
+                    this.props.handleAlertWarning({message: data.message, class: 'alert-danger'});
+                } 
             },
             () => {
                 this.props.history.push('/login');

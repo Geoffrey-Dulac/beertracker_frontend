@@ -1,0 +1,31 @@
+@import '../colors.scss';
+
+.alert-band {
+    position: fixed;
+    border-radius: 8px;
+    width: 90%;
+    top: 60px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 100;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: black !important;
+    transition-duration: 0.7s;
+    &.alert-danger {
+        background-color: $cerror;
+    }
+    &.alert-success {
+        background-color: $cprimary200;
+    }
+    .close-cross {
+        height: 15px;
+        cursor: pointer;
+    }
+    &.opacity0 {
+        opacity: 0;
+    }
+}

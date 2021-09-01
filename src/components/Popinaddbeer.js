@@ -42,7 +42,9 @@ function Popinaddbeer(props) {
         return (
             <div>
                 <Popinbackground />
-                <Popin url_request='http://localhost:8000/create_user_beer' handleClosePopin={props.handleClosePopin} autocomplete_beers={beers} autocomplete_step={1} elements={datas} />
+                <Popin url_request='http://localhost:8000/create_user_beer' handleAlertWarning={(obj) => props.handleAlert(obj)} 
+                    handleAlertSuccess={() => props.handleAlert({message: 'Bière ajoutée avec succès', class:'alert-success'})} 
+                    handleClosePopin={props.handleClosePopin} autocomplete_beers={beers} autocomplete_step={1} elements={datas} />
             </div>
         );
     } else {
