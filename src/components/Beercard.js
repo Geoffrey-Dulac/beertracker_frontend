@@ -7,7 +7,7 @@ function Beercard(props) {
     }
 
     return (
-        <div className='beercard'> 
+        <div className={props.usergrade || props.usergrade === 0 ? 'beercard bgsecondary200' : 'beercard'}> 
             <div className='width-parts-card-large d-flex align-items-center'>
                 <img className='logo_beer_card' src={logo_beer_bottle} alt='logo_beer_bottle' />
                 <div>      

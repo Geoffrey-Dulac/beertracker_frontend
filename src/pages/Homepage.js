@@ -11,8 +11,6 @@ function Homepage() {
     const [user_beers, setUserbeers] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isPopinAddBeer, setIsPopinAddBeer] = useState(false);
-    const userBeersLenghtInitial = 6;
-    const [userBeerCounter, setUserBeerCounter] = useState(userBeersLenghtInitial);
 
     const handleAddBeerClick = () => {
         setIsPopinAddBeer(true);
@@ -43,7 +41,7 @@ function Homepage() {
             <div className="container-pages">
                 <Menu />
                 <h1>Hello {username}</h1>
-                <Beercards beers={user_beers} header='Mon classement bières' beersLength={5} />
+                <Beercards searchFeature={true} beers={user_beers} header='Mon classement bières' beersLength={5} />
                 <button className='mainbutton position-cta-fixed py-3 px-5' onClick={handleAddBeerClick}>J'ajoute une bière</button>
                 { isPopinAddBeer &&
                     <Popinaddbeer handleClosePopin={handleClosePopin}/>

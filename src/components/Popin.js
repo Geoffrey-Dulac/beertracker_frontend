@@ -74,7 +74,7 @@ class Popin extends React.Component {
                 if (data.status === 'success') {
                     this.props.handleClosePopin(e);
                 } else if (data.status === 'failed') {
-                    console.log(data.message);
+                    console.error(data.message);
                 } else {
                     this.props.history.push('/login');
                 }
