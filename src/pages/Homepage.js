@@ -33,22 +33,23 @@ function Homepage() {
         }, 4000)
     }
 
+    const fetchUserBeers = () => {
+        setIsLoaded(false);
+        fetchData('http://localhost:8000/user_beers')
+        .then((response) => {
+            setUsername(response.username);
+            setUserbeers(response.user_beers);
+            setIsLoaded(true);
+        });
+    }
+
     const handleClosePopin = () => {
         setIsPopinAddBeer(false);
-        fetchData('http://localhost:8000/user_beers') 
-            .then((response) => {
-                setUserbeers(response.user_beers);
-                setIsLoaded(true);
-            });;
+        fetchUserBeers();
     }
 
     useEffect(() => {
-        fetchData('http://localhost:8000/user_beers')
-            .then((response) => {
-                setUsername(response.username);
-                setUserbeers(response.user_beers);
-                setIsLoaded(true);
-            });
+        fetchUserBeers();
     }, [])
 
     if (isLoaded) {
@@ -63,7 +64,7 @@ function Homepage() {
                     <Alert alertType={alertClass + ' opacity0'} text={alertText} closeAlert={handleCloseAlert} />
                 }
                 <h1>Hello {username}</h1>
-                <Beercards searchFeature={true} beers={user_beers} header='Mon classement bières' beersLength={5} />
+                <Beercards handleAlert={(obj) => handleAlert(obj)} searchFeature={true} beers={user_beers} header='Mon classement bières' beersLength={5} />
                 <button className='mainbutton position-cta-fixed py-3 px-5' onClick={handleAddBeerClick}>J'ajoute une bière</button>
                 { isPopinAddBeer &&
                     <Popinaddbeer handleAlert={(obj) => handleAlert(obj)} handleClosePopin={handleClosePopin} />

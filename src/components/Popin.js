@@ -9,7 +9,11 @@ class Popin extends React.Component {
         let objectInputs = {};
         Object.keys(this.props.elements).forEach((key) => {
             if (key === 'user_grade') {
-                objectInputs[key] = 5;
+                if (props.usergradeSaved) {
+                    objectInputs[key] = props.usergradeSaved;
+                } else {
+                    objectInputs[key] = 5;
+                }
             } else {
                 objectInputs[key] = '';
             }
@@ -36,13 +40,13 @@ class Popin extends React.Component {
     }
 
     handlePlusButton = () => {
-        if (parseInt(this.state.user_grade) > -1 && parseInt(this.state.user_grade) < 10) {
+        if (parseInt(this.state.user_grade) > 0 && parseInt(this.state.user_grade) < 10) {
             this.setState({ user_grade: parseInt(this.state.user_grade) + 1 });
         }
     }
 
     handleLessButton = () => {
-        if (parseInt(this.state.user_grade) > 0 && parseInt(this.state.user_grade) < 11) {
+        if (parseInt(this.state.user_grade) > 1 && parseInt(this.state.user_grade) < 11) {
             this.setState({ user_grade: parseInt(this.state.user_grade) - 1 });
         }
     }
@@ -59,6 +63,9 @@ class Popin extends React.Component {
         Object.keys(this.props.elements).forEach((key) => {
             dataObject[key] = this.state[key];
         })
+        if (this.props.beername) {
+            dataObject['beername'] = this.props.beername;
+        }
         fetch (this.props.url_request, {
             method: 'POST',
             headers : {

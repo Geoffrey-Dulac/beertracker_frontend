@@ -43,7 +43,7 @@ function Beercards(props) {
             <div>
                 { matchingBeers.map(({beer, brewer, user_grade}, i) => {
                     if (i < beersLenght) {
-                        return <Beercard key={beer.name} name={beer.name} degrees={beer.degrees} 
+                        return <Beercard handleAlert={(obj) => props.handleAlert(obj)} key={beer.name} name={beer.name} degrees={beer.degrees} 
                         kind={beer.kind} usergrade={user_grade} brewer={brewer} />
                     } else {
                         return '';

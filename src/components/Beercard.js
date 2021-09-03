@@ -22,12 +22,13 @@ function Beercard(props) {
         return (
             <div>
                 <Popinbackground />
-                <Beershow beer={{name: props.name, degrees: props.degrees }} brewer={props.brewer} usergrade={props.usergrade} handleCloseBeershow={handleCloseBeershow}/>
+                <Beershow handleAlert={(obj) => props.handleAlert(obj)} handleCloseBeershow={handleCloseBeershow} beer={{name: props.name, degrees: props.degrees }} 
+                    brewer={props.brewer} usergrade={props.usergrade} handleCloseBeershow={handleCloseBeershow} />
             </div>
         )
     } else {
         return (
-            <div onClick={handleClickOnBeer} className={props.usergrade || props.usergrade === 0 ? 'beercard bgsecondary200' : 'beercard'}> 
+            <div onClick={handleClickOnBeer} className={props.usergrade || props.usergrade === 0 ? 'beercard my-2 bgsecondary200' : 'beercard my-2'}> 
                 <div className='width-parts-card-large d-flex align-items-center'>
                     <img className='logo_beer_card' src={logo_beer_bottle} alt='logo_beer_bottle' />
                     <div>      
@@ -35,7 +36,6 @@ function Beercard(props) {
                         <p className='mb-0 cgrey200'>Brasserie {truncate(props.brewer.name, 19)}</p>
                     </div> 
                 </div>
-                {console.log(props)}
                 <p className='width-parts-card mb-0 d-none d-md-block'>{props.brewer.city}</p>
                 <p className='width-parts-card mb-0 d-none d-md-block'>{props.degrees}°</p>
                 <p className='width-parts-card mb-0'>{props.usergrade} <span className='outof10'>/10</span></p>
