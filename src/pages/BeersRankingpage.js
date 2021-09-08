@@ -11,11 +11,17 @@ function BeersRankingpage() {
     const [alertClass, setAlertClass] = useState('');
     const [alertText, setAlertText] = useState('');
     const [isAlertOpen, setIsAlertOpen] = useState(false);
+    let api_url;
+    if (process.env.NODE_ENV === 'development') {
+        api_url = 'http://localhost:8000/'
+    } else if (process.env.NODE_ENV === 'production') {
+        api_url = 'https://beertracker-api.herokuapp.com/'
+    }
 
     function fetchBeers() {
         return new Promise(resolve => {
             setIsLoaded(false);
-            fetchData('http://localhost:8000/beers')
+            fetchData(`${api_url}beers`)
                 .then((response) => {
                     setBeers(response.beers);
                     setIsLoaded(true);

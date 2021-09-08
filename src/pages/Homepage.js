@@ -15,6 +15,12 @@ function Homepage() {
     const [alertText, setAlertText] = useState('');
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [isPopinAddBeer, setIsPopinAddBeer] = useState(false);
+    let api_url;
+    if (process.env.NODE_ENV === 'development') {
+        api_url = 'http://localhost:8000/'
+    } else if (process.env.NODE_ENV === 'production') {
+        api_url = 'https://beertracker-api.herokuapp.com/'
+    }
 
     const handleAddBeerClick = () => {
         setIsPopinAddBeer(true);
@@ -37,7 +43,7 @@ function Homepage() {
     function fetchUserBeers() {
         return new Promise(resolve => {
             setIsLoaded(false);
-            fetchData('http://localhost:8000/user_beers')
+            fetchData(`${api_url}user_beers`)
             .then((response) => {
                 setUsername(response.username);
                 setUserbeers(response.user_beers);

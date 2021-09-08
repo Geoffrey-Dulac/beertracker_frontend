@@ -6,13 +6,19 @@ import Popinloading from './Popinloading';
 function Popinaddbeer(props) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [beers, setBeers] = useState([]);
+    let api_url;
+    if (process.env.NODE_ENV === 'development') {
+        api_url = 'http://localhost:8000/'
+    } else if (process.env.NODE_ENV === 'production') {
+        api_url = 'https://beertracker-api.herokuapp.com/'
+    }
 
     const datas = {name: 'Choisissez votre bière', user_grade: 'Quelle note lui attribueriez-vous ?'}
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            fetch ('http://localhost:8000/beers_names', {
+            fetch (`${api_url}beers_names`, {
                 headers : {
                     Authorization: `Bearer ${token}`
                 }
@@ -34,7 +40,7 @@ function Popinaddbeer(props) {
         } else {
             props.history.push('/login');
         }
-    }, [props.history])
+    }, [props.history, api_url])
 
 
 
@@ -42,7 +48,7 @@ function Popinaddbeer(props) {
         return (
             <div>
                 <Popinbackground />
-                <Popin url_request='http://localhost:8000/create_user_beer' handleAlertWarning={(obj) => props.handleAlert(obj)} 
+                <Popin url_request={api_url + 'create_user_beer'} handleAlertWarning={(obj) => props.handleAlert(obj)} 
                     handleAlertSuccess={() => props.handleAlert({message: 'Bière ajoutée avec succès', class:'alert-success'})} 
                     handleClosePopin={props.handleClosePopin} autocomplete_beers={beers} autocomplete_step={1} elements={datas} />
             </div>

@@ -9,6 +9,13 @@ class Signuppage extends React.Component {
     }
 
     render() {
+        let api_url;
+        if (process.env.NODE_ENV === 'development') {
+            api_url = 'http://localhost:8000/'
+        } else if (process.env.NODE_ENV === 'production') {
+            api_url = 'https://beertracker-api.herokuapp.com/'
+        }
+
         return (
             <div className='signuppage'>
                 <div className='formcard'>
@@ -16,7 +23,7 @@ class Signuppage extends React.Component {
                         <h1>Beertracker</h1>
                         <h3>inscription</h3>                
                     </div>
-                    <Form handleSubmission={(token) => this.handleSignup(token)} classes='mb-1' url='http://localhost:8000/users' buttonText="S'inscrire" inputs={['username', 'email', 'password']} />
+                    <Form handleSubmission={(token) => this.handleSignup(token)} classes='mb-1' url={api_url + 'users'} buttonText="S'inscrire" inputs={['username', 'email', 'password']} />
                     <Link to="/login"><p className='text-dark mt-2'>Se connecter</p></Link>
                 </div>
             </div>
