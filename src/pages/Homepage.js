@@ -24,23 +24,27 @@ function Homepage() {
         setIsAlertOpen(false);
     }
 
-    const handleAlert = (obj) => {
+    async function handleAlert(obj) {
+        await fetchUserBeers();
         setAlertText(obj.message);
         setAlertClass(obj.class);
         setIsAlertOpen(true);
         setTimeout(() => {
             setIsAlertOpen(false);
-        }, 4000)
+        }, 5000)
     }
 
-    const fetchUserBeers = () => {
-        setIsLoaded(false);
-        fetchData('http://localhost:8000/user_beers')
-        .then((response) => {
-            setUsername(response.username);
-            setUserbeers(response.user_beers);
-            setIsLoaded(true);
-        });
+    function fetchUserBeers() {
+        return new Promise(resolve => {
+            setIsLoaded(false);
+            fetchData('http://localhost:8000/user_beers')
+            .then((response) => {
+                setUsername(response.username);
+                setUserbeers(response.user_beers);
+                setIsLoaded(true);
+                resolve();
+            });
+        })
     }
 
     const handleClosePopin = () => {

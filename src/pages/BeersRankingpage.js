@@ -12,13 +12,16 @@ function BeersRankingpage() {
     const [alertText, setAlertText] = useState('');
     const [isAlertOpen, setIsAlertOpen] = useState(false);
 
-    const fetchBeers = () => {
-        setIsLoaded(false);
-        fetchData('http://localhost:8000/beers')
-            .then((response) => {
-                setBeers(response.beers);
-                setIsLoaded(true);
-            });
+    function fetchBeers() {
+        return new Promise(resolve => {
+            setIsLoaded(false);
+            fetchData('http://localhost:8000/beers')
+                .then((response) => {
+                    setBeers(response.beers);
+                    setIsLoaded(true);
+                    resolve();
+                });
+        });
     }
 
     useEffect(() => {
@@ -29,13 +32,14 @@ function BeersRankingpage() {
         setIsAlertOpen(false);
     }
 
-    const handleAlert = (obj) => {
+    async function handleAlert(obj) {
+        await fetchBeers();
         setAlertText(obj.message);
         setAlertClass(obj.class);
         setIsAlertOpen(true);
         setTimeout(() => {
             setIsAlertOpen(false);
-        }, 4000)
+        }, 5000)
     }
 
     if (isLoaded) {
